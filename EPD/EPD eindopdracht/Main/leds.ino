@@ -2,7 +2,7 @@
 const int ledpin = 6;
 const int pins[] = {A0,A1,A2,A3,A4,A5};
 
-void LedControl_setup() {
+void ledsSetup() {
   Serial.begin(9600);
   for (int i = 0; i < ledpin; i++) {
     pinMode(pins[i], OUTPUT);
@@ -11,7 +11,7 @@ void LedControl_setup() {
 }
 
 
-void ledControl_ledsAanOfUit(int a) {
+void leds_ledsAanOfUit(int a) {
   for (int r = 0; r < ledpin; r++) {
     digitalWrite(pins[r], LOW);
     delay(100);

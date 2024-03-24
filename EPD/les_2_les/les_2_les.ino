@@ -1,5 +1,5 @@
 #include <Servo.h>
-const int SERVOPIN = 9;
+const int SERVOPIN = 10;
 Servo servo;
 int degrees;
 int PotentiometerPin = A3;
@@ -8,16 +8,17 @@ bool groteCheck = true;
 
 void setup() {
   Serial.begin(9600);
-
+  LedControl_setup();
   servo.attach(SERVOPIN);
+  ledControl_ledsAanOfUit(HIGH);
 }
 void loop() {
 
-  servo.write(potentiometerRead());
+  // servo.write(potentiometerRead());
   delay(5);  // dit mag natuurlijk niet, en dat gaan we in de lessen
   // dan ook oplossen!
 
-  // servo.write(heenEnWeer());
+  servo.write(heenEnWeer());
 }
 
 
