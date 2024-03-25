@@ -27,13 +27,18 @@ void setup() {
   ledsSetup();
   servosetup();
 
+
 }
 
 void loop() {
-  
-    servoFirstOpen();
+  // ledsOranjeKlipper();
+ledsOranjeKlipper();
+ledsStoplichtNoord("ROOD");
+ledsStoplichtZuid("ROOD");
 
-  servoDicht();
+  //   servoFirstOpen();
+
+  // servoDicht();
 
 
 //   for (int i = 0; i < FONTLENGTE; i++) {
