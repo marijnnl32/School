@@ -17,7 +17,7 @@ void buzz() {
   delay(1000);
 }
 
-void buzzFast(){
+void buzzTrein(){
    tone(BUZZER_PIN, 1000);
     delay(100);
     noTone(BUZZER_PIN);

@@ -25,7 +25,7 @@ byte font[]{
 
 
 
-void aftellen() {
+bool aftellen() {
   int interval = 1000;
   int i = 5; 
   while(i >= 0) {
@@ -36,5 +36,5 @@ void aftellen() {
     }
     Serial.println(font[i]);
   }
-  
+  return true;
 }
