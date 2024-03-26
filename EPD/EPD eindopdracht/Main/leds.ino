@@ -33,9 +33,10 @@ void ledsStoplichtNoord(String a) {
   }
 
   else if (a == "UIT") {
-    for (int i = 3; i < 6; i++)
-      digitalWrite(PINS[i], LOW)
+    for (int i = 3; i < 6; i++){
+      digitalWrite(PINS[i], LOW);
   }
+}
 }
 
 void ledsStoplichtZuid(String a) {
@@ -47,9 +48,11 @@ void ledsStoplichtZuid(String a) {
 
   else if (a == "GROEN") {
     digitalWrite(PINS[3], HIGH);
+
   } else if (a == "UIT") {
-    for (int i = 3; i < 6; i++)
-      digitalWrite(PINS[i], LOW)
+    for (int i = 3; i < 6; i++){
+      digitalWrite(PINS[i], LOW);
+  }
   }
 }
 

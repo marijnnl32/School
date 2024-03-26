@@ -1,4 +1,3 @@
-unsigned long previousMillis = 0;
 
 
 void serialSetup() {
@@ -6,14 +5,17 @@ void serialSetup() {
 }
 
 
-bool setTimer(int a{
-  int interval = a if (millis() >= previousMillis + interval) {
+bool setTimer(int a){
+  previousMillis = millis();
+  int interval = a;
+  
+  if (millis() >= previousMillis + interval) {
 
-    return (TRUE)
+    return true;
   }
 
   else {
-    return (FALSE)'
- '
+    return false;
+ 
   }
 }

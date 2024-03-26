@@ -1,7 +1,9 @@
+unsigned long previousMillis = 0;
 
 void setup() {
   ledsSetup();
   servosetup();
+  Buzzersetup();
 }
 
 void loop() {
@@ -9,7 +11,9 @@ void loop() {
   ledsOranjeKlipper();
   ledsStoplichtNoord("ROOD");
   ledsStoplichtZuid("ROOD");
-
+  // aftellen();
+//  buzz();
+//buzzFast();
   //   servoFirstOpen();
 
   // servoDicht();

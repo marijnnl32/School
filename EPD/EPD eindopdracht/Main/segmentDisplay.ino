@@ -28,8 +28,8 @@ byte font[]{
 void aftellen() {
   int interval = 1000;
   int i = 5; 
-  while(i >= 0;) {
-    if (millis() >= previousMillis + interval)
+  while(i >= 0) {
+    if (millis() >= previousMillis + interval);
     {
       setShiftRegister(font[i]);
       i--;
