@@ -115,7 +115,7 @@ void exitTreinKomtEraanZuid() {
 
 void entrySlachtboomDicht() {
   ledsStoplichtNoord("ROOD");
-    ledsStoplichtZuid("ROOD");
+  ledsStoplichtZuid("ROOD");
 }
 
 void doSlachtboomDicht() {
@@ -124,13 +124,13 @@ void doSlachtboomDicht() {
 
 void exitSlachtboomDicht() {
   ledsStoplichtNoord("UIT");
-    ledsStoplichtZuid("UIT");
+  ledsStoplichtZuid("UIT");
 }
 
 
 void entrySlachtboomOpenen() {
   ledsStoplichtNoord("ROOD");
-    ledsStoplichtZuid("ROOD");
+  ledsStoplichtZuid("ROOD");
 }
 
 void doSlachtboomOpenen() {
@@ -141,24 +141,39 @@ void doSlachtboomOpenen() {
 
 void exitSlachtboomOpenen() {
   ledsStoplichtNoord("UIT");
-ledsStoplichtZuid("UIT");
+  ledsStoplichtZuid("UIT");
 }
 
 
 
 void entrySlachtboomOpen() {
   ledsStoplichtNoord("ROOD");
-ledsStoplichtZuid("ROOD");
-
+  ledsStoplichtZuid("ROOD");
 }
 
 void doSlachtboomOpen() {
   aftellen();
-buzz();
-ledsOranjeKlipper();
+  buzz();
+  ledsOranjeKlipper();
 }
 
 void exitSlachtboomOpen() {
   ledsStoplichtNoord("UIT");
-ledsStoplichtZuid("UIT");
+  ledsStoplichtZuid("UIT");
+}
+
+
+void entryRust() {
+  Settimer()
+    StoplichtNoord("ROOD")
+      StoplichtZuid("ROOD")
+}
+
+void doRust() {
+  // nothing
+}
+
+void exitRust() {
+  ledsStoplichtNoord("UIT");
+  ledsStoplichtZuid("UIT");
 }

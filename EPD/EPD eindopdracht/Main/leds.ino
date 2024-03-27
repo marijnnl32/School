@@ -1,4 +1,3 @@
-
 const int LEDPIN = 6;
 const int PINS[] = { A0, A1, A2, A3, A4, A5 };
 const int ORANJENOORD = PINS[1];
