@@ -32,15 +32,15 @@ void setup() {
  
 void loop() {
   
-  for (int i = 0; i < FONTLENGTE; i++) {
-    setShiftRegister(font[i]);
-    delay(200);
-    Serial.println(font[i]);
+  // for (int i = 0; i < FONTLENGTE; i++) {
+    // setShiftRegister(font[i]);
+    // delay(200);
+    // Serial.println(font[i]);
 
     
-}
+// }
 
-    //  setShiftRegister(font[9]);
+     setShiftRegister(font[8]);
 
  
   switch (huidigeToestand) {

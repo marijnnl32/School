@@ -4,6 +4,8 @@ void setup() {
   ledsSetup();
   servosetup();
   Buzzersetup();
+  setupShiftRegister();
+       
 }
 
 void loop() {
@@ -11,10 +13,12 @@ void loop() {
   ledsOranjeKlipper();
   ledsStoplichtNoord("ROOD");
   ledsStoplichtZuid("ROOD");
-  // aftellen();
-//  buzz();
-//buzzFast();
-  //   servoFirstOpen();
+  ledsStoplichtNoord("GROEN");
+  ledsStoplichtZuid("GROEN");
+  aftellen();
+  //  buzz();
+  // buzzTrein();
+ 
 
   // servoDicht();
 

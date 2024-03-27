@@ -3,6 +3,8 @@
 // const int TOON_WAARDE = 2;
 // int huidigeToestand = LEEG_DISPLAY;
 
+
+
 const int FONTLENGTE = 16;
 byte font[]{
   B11111100,  // 0
@@ -25,16 +27,19 @@ byte font[]{
 
 
 
-bool aftellen() {
+void aftellen() {
+  unsigned long previousMillis = 0;
   int interval = 1000;
-  int i = 5; 
-  while(i >= 0) {
-    if (millis() >= previousMillis + interval);
-    {
+  int i = 5;
+
+  while (i >= 0) {
+    if (millis() >= previousMillis + interval) {
+      previousMillis = millis();
+
       setShiftRegister(font[i]);
+
+      Serial.println(i);
       i--;
     }
-    Serial.println(font[i]);
   }
-  return true;
 }

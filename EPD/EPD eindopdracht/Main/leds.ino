@@ -71,7 +71,7 @@ void ledsStoplichtZuid(String a) {
 
 void ledsOranjeKlipper() {
   // while(Treinwacht == true)
-  Serial.println(millis());
+  
   if (millis() >= previousMillis + interval) {
     previousMillis = millis();
     if (oranjeAan == false) {
