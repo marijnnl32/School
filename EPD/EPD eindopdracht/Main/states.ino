@@ -164,9 +164,8 @@ void exitSlachtboomOpen() {
 
 
 void entryRust() {
-  Settimer()
-    StoplichtNoord("ROOD")
-      StoplichtZuid("ROOD")
+    ledsStoplichtNoord("ROOD");
+      ledsStoplichtZuid("ROOD");
 }
 
 void doRust() {
