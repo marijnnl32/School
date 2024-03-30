@@ -1,21 +1,27 @@
-
+int Serial_PreviousTimer = 0;
+int slagboomcount = 0;
 
 void serialSetup() {
   Serial.begin(9600);
 }
 
+void serialResetslagboomcount(){
+char command = Serial.read();
 
-bool setTimer(int a){
-  previousMillis = millis();
-  int interval = a;
-  
-  if (millis() >= previousMillis + interval) {
-
-    return true;
-  }
-
-  else {
-    return false;
- 
-  }
+if(command == 'r' || 'R'){
+slagboomcount = 0;
 }
+}
+
+
+
+
+void serial_setTimer() {
+  Serial_PreviousTimer = millis();
+}
+
+int serial_getTimer() {
+  return millis() - Serial_PreviousTimer;
+}
+
+

@@ -1,6 +1,6 @@
-const int shiftRegister_PIN_DS = 8;
-const int shiftRegister_PIN_STCP = 9;
-const int shiftRegister_PIN_SHCP = 10;
+const int shiftRegister_PIN_DS = 7;
+const int shiftRegister_PIN_STCP = 8;
+const int shiftRegister_PIN_SHCP = 9;
 
 void setupShiftRegister() {
   pinMode(shiftRegister_PIN_DS, OUTPUT);

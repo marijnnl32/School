@@ -1,4 +1,5 @@
 
+
 void entryAllesOpRood() {
   ledsStoplichtZuid("ROOD");
   ledsStoplichtNoord("ROOD");
@@ -15,7 +16,8 @@ void exitAllesOpRood() {
 
 
 void entryStoplichtNoordGroen() {
-  setTimer(5000);
+  serial_setTimer();
+  autodetectieNoord = false;
 }
 
 void doStoplichtNoordGroen() {
@@ -30,7 +32,7 @@ void exitStoplichtNoordGroen() {
 
 
 void entryStoplichtNoordOranje() {
-  setTimer(2000);
+  serial_setTimer();
 }
 
 void doStoplichtNoordOranje() {
@@ -38,12 +40,11 @@ void doStoplichtNoordOranje() {
 }
 
 void exitStoplichtNoordOranje() {
-  setTimer(2000);
 }
 
 
 void entryTreinKomtEraanNoord() {
-  //leeg
+  serial_setTimer();
 }
 
 void doTreinKomtEraanNoord() {
@@ -75,7 +76,8 @@ void exitSlachtboomSluiten() {
 
 
 void entryStoplichtZuidGroen() {
-  setTimer(5000);
+  autodetectieZuid = false;
+  serial_setTimer();
 }
 
 void doStoplichtZuidGroen() {
@@ -87,21 +89,21 @@ void exitStoplichtZuidGroen() {
 }
 
 void entryStoplichtZuidOranje() {
-  setTimer(2000);
+  serial_setTimer();
 }
 
 void doStoplichtZuidOranje() {
-  ledsStoplichtNoord("ORANJE");
+  ledsStoplichtZuid("ORANJE");
 }
 
 void exitStoplichtZuidOranje() {
-  ledsStoplichtNoord("UIT");
+  ledsStoplichtZuid("UIT");
 }
 
 
 
 void entryTreinKomtEraanZuid() {
-  setTimer(2000);
+  serial_setTimer();
 }
 
 void doTreinKomtEraanZuid() {
@@ -110,6 +112,22 @@ void doTreinKomtEraanZuid() {
 
 void exitTreinKomtEraanZuid() {
   //leeg
+}
+
+void entrySlagboomsluiten() {
+  ledsStoplichtNoord("ROOD");
+  ledsStoplichtZuid("ROOD");
+}
+
+void doSlagboomsluiten() {
+  ledsOranjeKlipper();
+  servoDicht();
+  buzzTrein();
+}
+
+void exitSlagboomsluiten() {
+  ledsStoplichtNoord("UIT");
+  ledsStoplichtZuid("UIT");
 }
 
 
@@ -134,7 +152,7 @@ void entrySlachtboomOpenen() {
 }
 
 void doSlachtboomOpenen() {
-  // ServoOpen();
+  servoOpen();
   buzzTrein();
   ledsOranjeKlipper();
 }
@@ -153,19 +171,23 @@ void entrySlachtboomOpen() {
 
 void doSlachtboomOpen() {
   aftellen();
-  buzz();
+  buzzAfwachten();
   ledsOranjeKlipper();
 }
 
+
 void exitSlachtboomOpen() {
+  slagboomcount ++;
+  Serial.println(slagboomcount);
   ledsStoplichtNoord("UIT");
   ledsStoplichtZuid("UIT");
 }
 
 
 void entryRust() {
-    ledsStoplichtNoord("ROOD");
-      ledsStoplichtZuid("ROOD");
+  serial_setTimer();
+  ledsStoplichtNoord("ROOD");
+  ledsStoplichtZuid("ROOD");
 }
 
 void doRust() {

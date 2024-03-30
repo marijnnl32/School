@@ -14,11 +14,7 @@ void ledsSetup() {
 }
 
 
-void leds_ledsAanOfUit(int a) {
-  for (int i = 0; i < LEDPIN; i++) {
-    digitalWrite(PINS[i], a);
-  }
-}
+
 
 void ledsStoplichtNoord(String a) {
   if (a == "ROOD") {
@@ -56,22 +52,10 @@ void ledsStoplichtZuid(String a) {
 }
 
 
-// void eenUit(int a) {
-//   for (int r = 7;r >= 0; r--) {
-//     digitalWrite(pins[r], LOW);
-//     delay(100);
-//     for (int i = 7; i >= 0; i--) {
-//       digitalWrite(pins[i], a);
-//       delay(100);
-//     }
-//     digitalWrite(pins[r], a);
-//   }
-// }
 
-void ledsOranjeKlipper() {
-  // while(Treinwacht == true)
-  
-  if (millis() >= previousMillis + interval) {
+
+void ledsOranjeKlipper() {  
+  if (millis() >= previousMillis + buzzer_interval) {
     previousMillis = millis();
     if (oranjeAan == false) {
       digitalWrite(PINS[1], HIGH);

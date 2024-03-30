@@ -1,8 +1,3 @@
-// const int LEEG_DISPLAY = 0;
-// const int ROLLEN = 1;
-// const int TOON_WAARDE = 2;
-// int huidigeToestand = LEEG_DISPLAY;
-
 
 
 const int FONTLENGTE = 16;

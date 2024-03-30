@@ -3,105 +3,129 @@ const int BUTTON_STATE_CHECK_PRESSED = 2;
 const int BUTTON_STATE_PRESSED = 3;
 const int BUTTON_STATE_CHECK_RELEASED = 4;
 const byte buttonAmount = 4;
-// Current state
-int button_State;
-// Timer variables
-const int BUTTON_INTERVAL = 10;  // 10msec, test your own button
-unsigned long button_Previous;
-// --- Setup -------------------
+
+
+
+int button_State[buttonAmount];
+
+unsigned long button_Previous[buttonAmount];
+
+const byte buttonPins[buttonAmount] = { 10, 11, 12, 13 };
+
+const int BUTTON_INTERVAL = 100;
+
 void button_Setup() {
-  Serial.begin(9600);  // to print "CLICK"
-  // Start state
-  button_State = BUTTON_STATE_RELEASED;
-  button_Released_Entry();
-}
-// --- Loop --------------------
-void button_Loop() {
-  switch (button_State) {
-    case BUTTON_STATE_RELEASED:
-      button_Released_Do();
-      if (buttonHardware_Down() == true) {
-        button_Released_Exit();
-        button_State = BUTTON_STATE_CHECK_PRESSED;
-        button_Check_Pressed_Entry();
-      }
-      break;
-    case BUTTON_STATE_CHECK_PRESSED:
-      button_Check_Pressed_Do();
-      if (buttonHardware_Up() == true) {
-        button_Check_Pressed_Exit();
-        button_State = BUTTON_STATE_RELEASED;
-        button_Released_Entry();
-      } else if ((buttonHardware_Down() == true)
-                 && (millis() - BUTTON_INTERVAL >= button_Previous)) {
-        button_Check_Pressed_Exit();
-        button_State = BUTTON_STATE_PRESSED;
-        button_Pressed_Entry();
-      }
-      break;
-    case BUTTON_STATE_PRESSED:
-      button_Pressed_Do();
-      if (buttonHardware_Up() == true) {
-        button_Pressed_Exit();
-        button_State = BUTTON_STATE_CHECK_RELEASED;
-        button_Check_Released_Entry();
-      }
-      break;
-    case BUTTON_STATE_CHECK_RELEASED:
-      button_Check_Released_Do();
-      if (buttonHardware_Down() == true) {
-        button_Check_Released_Exit();
-        button_State = BUTTON_STATE_PRESSED;
-        button_Pressed_Entry();
-      } else if ((buttonHardware_Up() == true)
-                 && (millis() - BUTTON_INTERVAL >= button_Previous)) {
-        button_Check_Released_Exit();
-        button_State = BUTTON_STATE_RELEASED;
-        // on this transation the CLICK occurs!
-        Serial.println("CLICK");
-        button_Released_Entry();
-      }
-      break;
+  for (int i = 0; i < buttonAmount; i++) {
+    button_State[i] = BUTTON_STATE_RELEASED;
   }
 }
 
-// --- BUTTON_STATE_RELEASED -----------
-void button_Released_Entry() {
+// Loop function for buttons
+void button_Loop() {
+  for (int i = 0; i < buttonAmount; i++) {
+    switch (button_State[i]) {
+      case BUTTON_STATE_RELEASED:
+        if (buttonHardware_Down(buttonPins[i])) {
+          button_Released_Exit(i);
+          button_State[i] = BUTTON_STATE_CHECK_PRESSED;
+          button_Check_Pressed_Entry(i);
+        }
+        break;
+      case BUTTON_STATE_CHECK_PRESSED:
+        if (buttonHardware_Up(buttonPins[i])) {
+          button_Check_Pressed_Exit(i);
+          button_State[i] = BUTTON_STATE_RELEASED;
+          button_Released_Entry(i);
+        } else if (buttonHardware_Down(buttonPins[i]) && (millis() - BUTTON_INTERVAL >= button_Previous[i])) {
+          button_Check_Pressed_Exit(i);
+          button_State[i] = BUTTON_STATE_PRESSED;
+          button_Pressed_Entry(i);
+        }
+        break;
+      case BUTTON_STATE_PRESSED:
+        if (buttonHardware_Up(buttonPins[i])) {
+          button_Pressed_Exit(i);
+          button_State[i] = BUTTON_STATE_CHECK_RELEASED;
+          button_Check_Released_Entry(i);
+        }
+        break;
+      case BUTTON_STATE_CHECK_RELEASED:
+        if (buttonHardware_Down(buttonPins[i])) {
+          button_Check_Released_Exit(i);
+          button_State[i] = BUTTON_STATE_PRESSED;
+          button_Pressed_Entry(i);
+        } else if (buttonHardware_Up(buttonPins[i]) && (millis() - BUTTON_INTERVAL >= button_Previous[i])) {
+          button_Check_Released_Exit(i);
+          button_State[i] = BUTTON_STATE_RELEASED;
+          Serial.println("CLICK");
+          // if (i == 1 || 2) {
+          //   treinVoorbij = true;
+          // } else if (i == 3) {
+          //   autodetectieNoord = true;
+
+          // }
+
+          // else if (i == 4) {
+          //   autodetectieZuid = true;
+          // }
+          button_Released_Entry(i);
+        }
+        break;
+    }
+  }
+}
+
+// Function to check if button is pressed (example function, replace with your actual implementation)
+bool buttonHardware_Down(int buttonPin) {
+  return digitalRead(buttonPin) == LOW;
+}
+
+// Function to check if button is released (example function, replace with your actual implementation)
+bool buttonHardware_Up(int buttonPin) {
+  return digitalRead(buttonPin) == HIGH;
+}
+
+// Button state transition functions
+void button_Released_Entry(int buttonIndex) {
   // <nothing>
 }
-void button_Released_Do() {
+void button_Released_Exit(int buttonIndex) {
   // <nothing>
 }
-void button_Released_Exit() {
+void button_Check_Pressed_Entry(int buttonIndex) {
+  button_Previous[buttonIndex] = millis();
+}
+void button_Check_Pressed_Exit(int buttonIndex) {
   // <nothing>
 }
-// --- BUTTON_STATE_CHECK_PRESSED -----------
-void button_Check_Pressed_Entry() {
-  button_Previous = millis();
-}
-void button_Check_Pressed_Do() {
+void button_Pressed_Entry(int buttonIndex) {
   // <nothing>
 }
-void button_Check_Pressed_Exit() {
+void button_Pressed_Exit(int buttonIndex) {
   // <nothing>
+   Serial.println(buttonIndex);
+
+            if(buttonIndex == 0){
+          autodetectieZuid = true;
+                    Serial.println("zuid");
+        }
+
+
+           else if (buttonIndex == 3 || 2){
+          treinDetectie = true;
+          Serial.println("TREIN");
+        }
+                else if(buttonIndex == 1){
+          autodetectieNoord = true;
+          Serial.println("noord");
+
+        }
+        
+
 }
-// --- BUTTON_STATE_PRESSED -----------
-void button_Pressed_Entry() {
-  // <nothing>
+void button_Check_Released_Entry(int buttonIndex) {
+  button_Previous[buttonIndex] = millis();
 }
-void button_Pressed_Do() {
-  // <nothing>
-}
-void button_Pressed_Exit() {
-  // <nothing>
-}
-// --- BUTTON_STATE_CHECK_RELEASED -----------
-void button_Check_Released_Entry() {
-  button_Previous = millis();
-}
-void button_Check_Released_Do() {
-  // <nothing>
-}
-void button_Check_Released_Exit() {
+void button_Check_Released_Exit(int buttonIndex) {
   // <nothing>
 }

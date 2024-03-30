@@ -1,5 +1,5 @@
 #include <Servo.h>
-const int SERVOPIN = 6;
+const byte SERVOPIN = 6;
 Servo servo;
 
 
@@ -9,11 +9,8 @@ void servosetup() {
 }
 
 
-void servoFirstOpen() {
-}
 
-
-bool servoDicht() {
+void servoDicht() {
   unsigned long currentMillis = 0;
   int millisInterval = 20;
   int i = 90;
@@ -24,6 +21,28 @@ bool servoDicht() {
     Serial.println(i);
     i--;
   }
+
 }
-return true;
+}
+
+
+void servoOpen() {
+  unsigned long currentMillis = 0;
+  int millisInterval = 20;
+  int i = 0;
+  while (i <= 90) {
+  if (millis() >= currentMillis + millisInterval) {
+    currentMillis = millis();
+    servo.write(i);
+    Serial.println(i);
+    i++;
+  }
+
+}
+}
+
+int servoRead(){
+
+return servo.read();
+
 }

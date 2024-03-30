@@ -1,26 +1,49 @@
 int BUZZER_PIN = 4;
+unsigned long buzzer_interval = 100; 
+bool buzzState = LOW; 
 
 void Buzzersetup() {
-  pinMode(BUZZER_PIN, OUTPUT); // Set the buzzer pin as an output
+  pinMode(BUZZER_PIN, OUTPUT); 
 }
 
-void buzz() {
-  // Emit a tone of 1000Hz for 500 milliseconds
-   for(int i = 0; i < 3; i++) {
-    tone(BUZZER_PIN, 1000);
-    delay(100);
-    noTone(BUZZER_PIN);
-    delay(100);
+void buzzAfwachten() {
+
+   byte buzzCount = 0;
+  unsigned long currentMillis = millis(); 
+  
+  if (currentMillis - previousMillis >= buzzer_interval) {
+    previousMillis = currentMillis; 
+    
+    if (buzzCount < 3) {
+      if (buzzState == LOW) {
+        tone(BUZZER_PIN, 1000);
+        buzzState = HIGH;
+      } else {
+        noTone(BUZZER_PIN);
+        buzzState = LOW;
+        buzzCount++;
+      }
+    } else {
+      noTone(BUZZER_PIN);
+      buzzCount = 0; 
+    }
   }
-  // Stop the tone for 500 milliseconds
-  noTone(BUZZER_PIN);
-  delay(1000);
 }
 
 void buzzTrein(){
-   tone(BUZZER_PIN, 1000);
-    delay(100);
-    noTone(BUZZER_PIN);
-    delay(50);
+  static unsigned long previousBuzzMillis = 0;
+  unsigned long currentMillis = millis();
+  
+  if (currentMillis - previousBuzzMillis >= buzzer_interval) {
+    previousBuzzMillis = currentMillis;
+    
 
+    if (buzzState == LOW) {
+      tone(BUZZER_PIN, 1000);
+      buzzState = HIGH;
+    } else {
+      noTone(BUZZER_PIN);
+      buzzState = LOW;
+    }
+  }
 }
