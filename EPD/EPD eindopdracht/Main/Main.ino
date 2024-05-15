@@ -9,10 +9,13 @@ void setup() {
   setupShiftRegister();
   button_Setup();
 
+
+
 }
 
 void loop() {
 
 button_Loop();
 Stateloop();
+// potentioOranje();
 }

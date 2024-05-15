@@ -52,7 +52,19 @@ void ledsStoplichtZuid(String a) {
 }
 
 
+void potentioOranje(){
+unsigned long previousMillis = millis();
+unsigned long intervalMillis = 0;
+  Serial.println(potentiometerRead());
 
+ledsStoplichtZuid("ORANJE");
+ledsStoplichtNoord("ORANJE");
+if(previousMillis + potentiometerRead() <= millis){
+  ledsStoplichtZuid("UIT");
+  ledsStoplichtNoord("UIT");
+}
+
+}
 
 void ledsOranjeKlipper() {  
   if (millis() >= previousMillis + buzzer_interval) {

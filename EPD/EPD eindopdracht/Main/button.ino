@@ -58,6 +58,7 @@ void button_Loop() {
           button_Check_Released_Exit(i);
           button_State[i] = BUTTON_STATE_RELEASED;
           Serial.println("CLICK");
+
           // if (i == 1 || 2) {
           //   treinVoorbij = true;
           // } else if (i == 3) {
@@ -110,17 +111,20 @@ void button_Pressed_Exit(int buttonIndex) {
                     Serial.println("zuid");
         }
 
-
-           else if (buttonIndex == 3 || 2){
-          treinDetectie = true;
-          Serial.println("TREIN");
-        }
                 else if(buttonIndex == 1){
           autodetectieNoord = true;
           Serial.println("noord");
 
         }
         
+           else if (buttonIndex == 3 || 2){
+            if(satenumber == 9){
+              treinVoorbij = true;
+            }
+          treinDetectie = true;
+          Serial.println("TREIN");
+        }
+
 
 }
 void button_Check_Released_Entry(int buttonIndex) {

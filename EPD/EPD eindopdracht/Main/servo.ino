@@ -1,6 +1,10 @@
 #include <Servo.h>
+int servoLoc = 90;
 const byte SERVOPIN = 6;
+bool isServoClosed = false;
 Servo servo;
+unsigned long currentMillis = millis();
+
 
 
 void servosetup() {
@@ -8,41 +12,47 @@ void servosetup() {
   servo.write(90);
 }
 
-
-
 void servoDicht() {
-  unsigned long currentMillis = 0;
-  int millisInterval = 20;
-  int i = 90;
-  while (i >= 0) {
-  if (millis() >= currentMillis + millisInterval) {
-    currentMillis = millis();
-    servo.write(i);
-    Serial.println(i);
-    i--;
+    int millisInterval = 30;
+    unsigned long currentMillis = millis();
+  if (currentMillis >= previousMillis + millisInterval) {
+    servoLoc--;
+    servo.write(servoLoc);
+    Serial.println(servoLoc);
+    previousMillis = currentMillis;
+     return servoLoc;
   }
-
-}
 }
 
 
-void servoOpen() {
-  unsigned long currentMillis = 0;
-  int millisInterval = 20;
-  int i = 0;
-  while (i <= 90) {
-  if (millis() >= currentMillis + millisInterval) {
-    currentMillis = millis();
-    servo.write(i);
-    Serial.println(i);
-    i++;
+int servoOpen() {
+  int millisInterval = 30;
+  unsigned long currentMillis = millis();
+  if (currentMillis >= previousMillis + millisInterval) {
+    servoLoc++;
+    servo.write(servoLoc);
+    Serial.println(servoLoc);
+    previousMillis = currentMillis;
+    return servoLoc;
   }
-
-}
 }
 
-int servoRead(){
 
-return servo.read();
+bool servoOpened() {
+  // return servo.read();
+  if (servoLoc >= 90) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
+
+bool servoClosed() {
+  // return servo.read();
+  if (servoLoc <= 0) {
+    return true;
+  } else {
+    return false;
+  }
 }

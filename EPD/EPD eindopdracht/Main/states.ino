@@ -1,6 +1,15 @@
+// IN ASTHA
+// VERANDER NAAM VAN STOPLICHT ORANE  TREIN KOMT ER AAN EN
+//DE IF VAN SERVOREAD VERANDEREN
+
+
+
+//DINGEN TE VERANDEREN
+//
 
 
 void entryAllesOpRood() {
+  buzzStop();
   ledsStoplichtZuid("ROOD");
   ledsStoplichtNoord("ROOD");
 }
@@ -26,6 +35,7 @@ void doStoplichtNoordGroen() {
 
 void exitStoplichtNoordGroen() {
   ledsStoplichtNoord("UIT");
+  Serial.println("hoihoi fgsdd");
 }
 
 
@@ -40,6 +50,7 @@ void doStoplichtNoordOranje() {
 }
 
 void exitStoplichtNoordOranje() {
+  ledsStoplichtNoord("UIT");
 }
 
 
@@ -115,6 +126,7 @@ void exitTreinKomtEraanZuid() {
 }
 
 void entrySlagboomsluiten() {
+  serial_setTimer();
   ledsStoplichtNoord("ROOD");
   ledsStoplichtZuid("ROOD");
 }
@@ -167,6 +179,7 @@ void exitSlachtboomOpenen() {
 void entrySlachtboomOpen() {
   ledsStoplichtNoord("ROOD");
   ledsStoplichtZuid("ROOD");
+  serial_setTimer();
 }
 
 void doSlachtboomOpen() {
@@ -177,10 +190,13 @@ void doSlachtboomOpen() {
 
 
 void exitSlachtboomOpen() {
-  slagboomcount ++;
+  slagboomcount++;
   Serial.println(slagboomcount);
   ledsStoplichtNoord("UIT");
   ledsStoplichtZuid("UIT");
+  treinVoorbij = false;
+  treinDetectie = false;
+  buzzStop();
 }
 
 
