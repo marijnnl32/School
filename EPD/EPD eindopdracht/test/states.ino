@@ -30,14 +30,12 @@ void entryStoplichtNoordGroen() {
 }
 
 void doStoplichtNoordGroen() {
-  ledsStoplichtZuid("ROOD");
   ledsStoplichtNoord("GROEN");
-    autodetectieNoord = false;
 }
 
 void exitStoplichtNoordGroen() {
-   ledsStoplichtNoord("UIT");
-  Serial.println("anus anus");
+  ledsStoplichtNoord("UIT");
+  Serial.println("hoihoi fgsdd");
 }
 
 
@@ -48,7 +46,6 @@ void entryStoplichtNoordOranje() {
 }
 
 void doStoplichtNoordOranje() {
-    ledsStoplichtZuid("ROOD");
   ledsStoplichtNoord("ORANJE");
 }
 
@@ -96,8 +93,6 @@ void entryStoplichtZuidGroen() {
 
 void doStoplichtZuidGroen() {
   ledsStoplichtZuid("GROEN");
-  ledsStoplichtNoord("ROOD");
-
 }
 
 void exitStoplichtZuidGroen() {
@@ -110,8 +105,6 @@ void entryStoplichtZuidOranje() {
 
 void doStoplichtZuidOranje() {
   ledsStoplichtZuid("ORANJE");
-    ledsStoplichtNoord("ROOD");
-
 }
 
 void exitStoplichtZuidOranje() {

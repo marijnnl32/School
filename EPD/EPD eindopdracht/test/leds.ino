@@ -1,5 +1,5 @@
 const int LEDPIN = 6;
-const int PINS[] = { A0, A1, A2, A3, 3, A5 };
+const int PINS[] = { A0, A1, A2, A3, A4, A5 };
 const int ORANJENOORD = PINS[1];
 const int ORANJEZUID = PINS[4];
 bool oranjeAan = false;
@@ -25,11 +25,13 @@ void ledsStoplichtNoord(String a) {
 
   else if (a == "GROEN") {
     digitalWrite(PINS[0], HIGH);
-  } else if (a == "UIT") {
-    for (int i = 3; i < 6; i++) {
-      digitalWrite(PINS[i], LOW);
-    }
   }
+
+  else if (a == "UIT") {
+    for (int i = 3; i < 6; i++){
+      digitalWrite(PINS[i], LOW);
+  }
+}
 }
 
 void ledsStoplichtZuid(String a) {
@@ -43,27 +45,28 @@ void ledsStoplichtZuid(String a) {
     digitalWrite(PINS[3], HIGH);
 
   } else if (a == "UIT") {
-    for (int i = 3; i < 6; i++) {
+    for (int i = 3; i < 6; i++){
       digitalWrite(PINS[i], LOW);
-    }
+  }
   }
 }
 
 
-void potentioOranje() {
-  unsigned long previousMillis = millis();
-  unsigned long intervalMillis = 0;
+void potentioOranje(){
+unsigned long previousMillis = millis();
+unsigned long intervalMillis = 0;
   Serial.println(potentiometerRead());
 
-  ledsStoplichtZuid("ORANJE");
-  ledsStoplichtNoord("ORANJE");
-  if (previousMillis + potentiometerRead() <= millis) {
-    ledsStoplichtZuid("UIT");
-    ledsStoplichtNoord("UIT");
-  }
+ledsStoplichtZuid("ORANJE");
+ledsStoplichtNoord("ORANJE");
+if(previousMillis + potentiometerRead() <= millis){
+  ledsStoplichtZuid("UIT");
+  ledsStoplichtNoord("UIT");
 }
 
-void ledsOranjeKlipper() {
+}
+
+void ledsOranjeKlipper() {  
   if (millis() >= previousMillis + buzzer_interval) {
     previousMillis = millis();
     if (oranjeAan == false) {
