@@ -1,6 +1,9 @@
 int Serial_PreviousTimer = 0;
 int slagboomcount = 0;
 
+void addSlachtboomcount(){
+   slagboomcount++;
+}
 void serialSetup() {
   Serial.begin(9600);
 }

@@ -5,8 +5,9 @@ int potentiometerRead() {
 
   int potValue = analogRead(PotentiometerPin);
 
-  int degrees = map(potValue, 0, 1023, 0, 5000);
-  Serial.println(degrees);
+  int extraMillis = map(potValue, 0, 1023, 0 , 2000);
+  Serial.println(extraMillis);
 
-  return degrees;
+  return extraMillis;
 }
+

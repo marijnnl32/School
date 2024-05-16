@@ -26,11 +26,13 @@ void ledsStoplichtNoord(String a) {
   else if (a == "GROEN") {
     digitalWrite(PINS[0], HIGH);
   } else if (a == "UIT") {
-    for (int i = 3; i < 6; i++) {
+    for (int i = 0; i < 3; i++) {
       digitalWrite(PINS[i], LOW);
     }
   }
 }
+
+
 
 void ledsStoplichtZuid(String a) {
   if (a == "ROOD") {
@@ -49,19 +51,6 @@ void ledsStoplichtZuid(String a) {
   }
 }
 
-
-void potentioOranje() {
-  unsigned long previousMillis = millis();
-  unsigned long intervalMillis = 0;
-  Serial.println(potentiometerRead());
-
-  ledsStoplichtZuid("ORANJE");
-  ledsStoplichtNoord("ORANJE");
-  if (previousMillis + potentiometerRead() <= millis) {
-    ledsStoplichtZuid("UIT");
-    ledsStoplichtNoord("UIT");
-  }
-}
 
 void ledsOranjeKlipper() {
   if (millis() >= previousMillis + buzzer_interval) {

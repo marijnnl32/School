@@ -8,14 +8,9 @@ void setup() {
   Buzzersetup();
   setupShiftRegister();
   button_Setup();
-
-
-
 }
 
 void loop() {
-
-button_Loop();
+buttonLoop();
 Stateloop();
-// potentioOranje();
 }

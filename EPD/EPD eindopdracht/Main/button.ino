@@ -21,7 +21,7 @@ void button_Setup() {
 }
 
 // Loop function for buttons
-void button_Loop() {
+void buttonLoop() {
   for (int i = 0; i < buttonAmount; i++) {
     switch (button_State[i]) {
       case BUTTON_STATE_RELEASED:

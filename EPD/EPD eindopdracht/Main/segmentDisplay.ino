@@ -1,4 +1,5 @@
-
+int countdownSegment = 5;
+bool isTimerklaar = false;
 
 const int FONTLENGTE = 16;
 byte font[]{
@@ -20,21 +21,29 @@ byte font[]{
   B10001110,  // F
 };
 
+void resetSegmentTimer(){
+isTimerklaar = false;
+}
 
 
-void aftellen() {
+boolean aftellen() {
   unsigned long previousMillis = 0;
   int interval = 1000;
-  int i = 5;
 
-  while (i >= 0) {
-    if (millis() >= previousMillis + interval) {
+
+
+  if (millis() >= previousMillis + interval) {
+    if (countdownSegment >= 0) {
       previousMillis = millis();
 
-      setShiftRegister(font[i]);
+      setShiftRegister(font[countdownSegment]);
 
-      Serial.println(i);
-      i--;
+      Serial.println(countdownSegment);
+      countdownSegment--;
+    
+    } else {
+      countdownSegment = 5;
+      isTimerklaar = true;
     }
   }
 }

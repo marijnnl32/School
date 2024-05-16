@@ -9,6 +9,7 @@
 
 
 void entryAllesOpRood() {
+  resetSegmentTimer();
   buzzStop();
   ledsStoplichtZuid("ROOD");
   ledsStoplichtNoord("ROOD");
@@ -26,18 +27,16 @@ void exitAllesOpRood() {
 
 void entryStoplichtNoordGroen() {
   serial_setTimer();
-  autodetectieNoord = false;
+  setAutodetectie(1);
 }
 
 void doStoplichtNoordGroen() {
   ledsStoplichtZuid("ROOD");
   ledsStoplichtNoord("GROEN");
-    autodetectieNoord = false;
 }
 
 void exitStoplichtNoordGroen() {
    ledsStoplichtNoord("UIT");
-  Serial.println("anus anus");
 }
 
 
@@ -63,10 +62,12 @@ void entryTreinKomtEraanNoord() {
 
 void doTreinKomtEraanNoord() {
   ledsStoplichtNoord("ORANJE");
+  ledsStoplichtZuid("ROOD");
 }
 
 void exitTreinKomtEraanNoord() {
   ledsStoplichtNoord("UIT");
+  ledsStoplichtZuid("UIT");
 }
 
 
@@ -90,8 +91,8 @@ void exitSlachtboomSluiten() {
 
 
 void entryStoplichtZuidGroen() {
-  autodetectieZuid = false;
-  serial_setTimer();
+setAutodetectie(2); 
+ serial_setTimer();
 }
 
 void doStoplichtZuidGroen() {
@@ -126,6 +127,8 @@ void entryTreinKomtEraanZuid() {
 
 void doTreinKomtEraanZuid() {
   ledsStoplichtZuid("ORANJE");
+  ledsStoplichtNoord("ROOD");
+
 }
 
 void exitTreinKomtEraanZuid() {
@@ -133,7 +136,6 @@ void exitTreinKomtEraanZuid() {
 }
 
 void entrySlagboomsluiten() {
-  serial_setTimer();
   ledsStoplichtNoord("ROOD");
   ledsStoplichtZuid("ROOD");
 }
@@ -152,7 +154,7 @@ void exitSlagboomsluiten() {
 
 void entrySlachtboomDicht() {
   ledsStoplichtNoord("ROOD");
-  ledsStoplichtZuid("ROOD");
+  ledsStoplichtNoord("ROOD");
 }
 
 void doSlachtboomDicht() {
@@ -196,13 +198,12 @@ void doSlachtboomOpen() {
 }
 
 
-void exitSlachtboomOpen() {
-  slagboomcount++;
+void exitSlachtboomOpen(){
+  addSlachtboomcount();
   Serial.println(slagboomcount);
   ledsStoplichtNoord("UIT");
   ledsStoplichtZuid("UIT");
-  treinVoorbij = false;
-  treinDetectie = false;
+  setTreinlangs();
   buzzStop();
 }
 
