@@ -7,25 +7,23 @@ unsigned long currentMillis = millis();
 
 
 
-void servosetup() {
+void servoSetup() {
   servo.attach(SERVOPIN);
   servo.write(90);
 }
 
 void servoDicht() {
-    int millisInterval = 30;
-    unsigned long currentMillis = millis();
+  int millisInterval = 30;
+  unsigned long currentMillis = millis();
   if (currentMillis >= previousMillis + millisInterval) {
     servoLoc--;
     servo.write(servoLoc);
     Serial.println(servoLoc);
     previousMillis = currentMillis;
-     return servoLoc;
   }
 }
 
-
-int servoOpen() {
+void servoOpen() {
   int millisInterval = 30;
   unsigned long currentMillis = millis();
   if (currentMillis >= previousMillis + millisInterval) {
@@ -33,13 +31,10 @@ int servoOpen() {
     servo.write(servoLoc);
     Serial.println(servoLoc);
     previousMillis = currentMillis;
-    return servoLoc;
   }
 }
 
-
 bool servoOpened() {
-  // return servo.read();
   if (servoLoc >= 90) {
     return true;
   } else {
@@ -47,9 +42,7 @@ bool servoOpened() {
   }
 }
 
-
 bool servoClosed() {
-  // return servo.read();
   if (servoLoc <= 0) {
     return true;
   } else {

@@ -20,7 +20,6 @@ void button_Setup() {
   }
 }
 
-// Loop function for buttons
 void buttonLoop() {
   for (int i = 0; i < buttonAmount; i++) {
     switch (button_State[i]) {
@@ -57,18 +56,7 @@ void buttonLoop() {
         } else if (buttonHardware_Up(buttonPins[i]) && (millis() - BUTTON_INTERVAL >= button_Previous[i])) {
           button_Check_Released_Exit(i);
           button_State[i] = BUTTON_STATE_RELEASED;
-          Serial.println("CLICK");
 
-          // if (i == 1 || 2) {
-          //   treinVoorbij = true;
-          // } else if (i == 3) {
-          //   autodetectieNoord = true;
-
-          // }
-
-          // else if (i == 4) {
-          //   autodetectieZuid = true;
-          // }
           button_Released_Entry(i);
         }
         break;
@@ -76,17 +64,14 @@ void buttonLoop() {
   }
 }
 
-// Function to check if button is pressed (example function, replace with your actual implementation)
 bool buttonHardware_Down(int buttonPin) {
   return digitalRead(buttonPin) == LOW;
 }
 
-// Function to check if button is released (example function, replace with your actual implementation)
 bool buttonHardware_Up(int buttonPin) {
   return digitalRead(buttonPin) == HIGH;
 }
 
-// Button state transition functions
 void button_Released_Entry(int buttonIndex) {
   // <nothing>
 }
@@ -103,29 +88,26 @@ void button_Pressed_Entry(int buttonIndex) {
   // <nothing>
 }
 void button_Pressed_Exit(int buttonIndex) {
-  // <nothing>
-   Serial.println(buttonIndex);
+  Serial.println(buttonIndex);
 
-            if(buttonIndex == 0){
-          autodetectieZuid = true;
-                    Serial.println("zuid");
-        }
+  if (buttonIndex == 0) {
+    autodetectieZuid = true;
+    Serial.println("zuid");
+  }
 
-                else if(buttonIndex == 1){
-          autodetectieNoord = true;
-          Serial.println("noord");
+  else if (buttonIndex == 1) {
+    autodetectieNoord = true;
+    Serial.println("noord");
 
-        }
-        
-           else if (buttonIndex == 3 || 2){
-            if(satenumber == 9){
-              treinVoorbij = true;
-            }
-          treinDetectie = true;
-          Serial.println("TREIN");
-        }
+  }
 
-
+  else if (buttonIndex == 3 || 2) {
+    if (statenumber == 9) {
+      treinVoorbij = true;
+    }
+    treinDetectie = true;
+    Serial.println("TREIN");
+  }
 }
 void button_Check_Released_Entry(int buttonIndex) {
   button_Previous[buttonIndex] = millis();

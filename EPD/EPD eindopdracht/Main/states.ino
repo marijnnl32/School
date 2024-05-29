@@ -1,11 +1,3 @@
-// IN ASTHA
-// VERANDER NAAM VAN STOPLICHT ORANE  TREIN KOMT ER AAN EN
-//DE IF VAN SERVOREAD VERANDEREN
-
-
-
-//DINGEN TE VERANDEREN
-//
 
 
 void entryAllesOpRood() {
@@ -36,25 +28,21 @@ void doStoplichtNoordGroen() {
 }
 
 void exitStoplichtNoordGroen() {
-   ledsStoplichtNoord("UIT");
+  ledsStoplichtNoord("UIT");
 }
-
-
-
 
 void entryStoplichtNoordOranje() {
   serial_setTimer();
 }
 
 void doStoplichtNoordOranje() {
-    ledsStoplichtZuid("ROOD");
+  ledsStoplichtZuid("ROOD");
   ledsStoplichtNoord("ORANJE");
 }
 
 void exitStoplichtNoordOranje() {
   ledsStoplichtNoord("UIT");
 }
-
 
 void entryTreinKomtEraanNoord() {
   serial_setTimer();
@@ -69,9 +57,6 @@ void exitTreinKomtEraanNoord() {
   ledsStoplichtNoord("UIT");
   ledsStoplichtZuid("UIT");
 }
-
-
-
 
 void entrySlachtboomSluiten() {
   ledsStoplichtZuid("ROOD");
@@ -89,16 +74,14 @@ void exitSlachtboomSluiten() {
   ledsStoplichtZuid("UIT");
 }
 
-
 void entryStoplichtZuidGroen() {
-setAutodetectie(2); 
- serial_setTimer();
+  setAutodetectie(2);
+  serial_setTimer();
 }
 
 void doStoplichtZuidGroen() {
   ledsStoplichtZuid("GROEN");
   ledsStoplichtNoord("ROOD");
-
 }
 
 void exitStoplichtZuidGroen() {
@@ -111,15 +94,12 @@ void entryStoplichtZuidOranje() {
 
 void doStoplichtZuidOranje() {
   ledsStoplichtZuid("ORANJE");
-    ledsStoplichtNoord("ROOD");
-
+  ledsStoplichtNoord("ROOD");
 }
 
 void exitStoplichtZuidOranje() {
   ledsStoplichtZuid("UIT");
 }
-
-
 
 void entryTreinKomtEraanZuid() {
   serial_setTimer();
@@ -128,7 +108,6 @@ void entryTreinKomtEraanZuid() {
 void doTreinKomtEraanZuid() {
   ledsStoplichtZuid("ORANJE");
   ledsStoplichtNoord("ROOD");
-
 }
 
 void exitTreinKomtEraanZuid() {
@@ -183,8 +162,6 @@ void exitSlachtboomOpenen() {
   ledsStoplichtZuid("UIT");
 }
 
-
-
 void entrySlachtboomOpen() {
   ledsStoplichtNoord("ROOD");
   ledsStoplichtZuid("ROOD");
@@ -197,8 +174,7 @@ void doSlachtboomOpen() {
   ledsOranjeKlipper();
 }
 
-
-void exitSlachtboomOpen(){
+void exitSlachtboomOpen() {
   addSlachtboomcount();
   Serial.println(slagboomcount);
   ledsStoplichtNoord("UIT");

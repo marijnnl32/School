@@ -1,4 +1,4 @@
-int BUZZER_PIN = 4;
+int const BUZZER_PIN = 4;
 unsigned long buzzer_interval = 100;
 bool buzzState = LOW;
 

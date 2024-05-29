@@ -7,15 +7,11 @@ int interval = 300;
 
 
 void ledsSetup() {
-  Serial.begin(9600);
   for (int i = 0; i < LEDPIN; i++) {
     pinMode(PINS[i], OUTPUT);
   }
 }
-
-
-
-
+// Dit is ook mogelijk met een int in plaats van een string
 void ledsStoplichtNoord(String a) {
   if (a == "ROOD") {
     digitalWrite(PINS[2], HIGH);
@@ -31,8 +27,6 @@ void ledsStoplichtNoord(String a) {
     }
   }
 }
-
-
 
 void ledsStoplichtZuid(String a) {
   if (a == "ROOD") {
@@ -50,7 +44,6 @@ void ledsStoplichtZuid(String a) {
     }
   }
 }
-
 
 void ledsOranjeKlipper() {
   if (millis() >= previousMillis + buzzer_interval) {

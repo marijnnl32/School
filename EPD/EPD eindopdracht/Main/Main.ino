@@ -4,13 +4,14 @@ unsigned long previousMillis = 0;
 void setup() {
   serialSetup();
   ledsSetup();
-  servosetup();
+  servoSetup();
   Buzzersetup();
   setupShiftRegister();
   button_Setup();
+  potentiometerSetup();
 }
 
 void loop() {
-buttonLoop();
-Stateloop();
+  buttonLoop();
+  Stateloop();
 }

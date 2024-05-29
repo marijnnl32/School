@@ -1,167 +1,177 @@
-byte satenumber = 0;
+byte statenumber = 0;
 bool treinVoorbij = false;
 bool treinDetectie = false;
 bool autodetectieNoord = false;
 bool autodetectieZuid = false;
-
-
-void setAutodetectie(int i){
-if(i == 1){
-  autodetectieNoord = false;
-}
-else if(i == 2){
-  autodetectieZuid = false;
-}
-}
-
-void setTreinlangs(){
- treinVoorbij = false;
- treinDetectie = false;
-}
-
-
 int kortePauze = 2000;
 int langePauze = 5000;
+const int allesOpRood = 0;
+const  int stoplichtNoordGroen = 1;
+const int stoplichtZuidGroen = 2;
+const int stoplichtNoordOranje = 3;
+const int stoplichtZuidOranje = 4;
+const int rust = 5;
+const int treinKomtEraanNoord = 6;
+const int treinKomtEraanZuid = 7;
+const int slachtboomSluiten = 8;
+const int slachtboomDicht = 9;
+const int slachtboomOpenen = 10;
+const int SlachtboomOpen = 11;
+
+void setAutodetectie(int i) {
+  if (i == 1) {
+    autodetectieNoord = false;
+  } else if (i == 2) {
+    autodetectieZuid = false;
+  }
+}
+
+void setTreinlangs() {
+  treinVoorbij = false;
+  treinDetectie = false;
+}
+
+
+
 
 void Stateloop() {
-  // Serial.println(satenumber);
-  switch (satenumber) {
+  // Serial.println(statenumber);
+  switch (statenumber) {
 
     case 0:
       entryAllesOpRood();
       if (autodetectieNoord == true) {
         exitAllesOpRood();
         entryStoplichtNoordGroen();
-        satenumber = 1;
+        statenumber = stoplichtNoordGroen;
       }
 
       else if (autodetectieZuid == true) {
         exitAllesOpRood();
-        satenumber = 2;
+        statenumber = stoplichtZuidGroen;
         entryStoplichtZuidGroen();
 
       }
 
       else if (treinDetectie == true) {
         exitAllesOpRood();
-        satenumber = 7;
+        statenumber = treinKomtEraanZuid;
         entrySlagboomsluiten();
       }
       break;
 
-    case 1:
+    case stoplichtNoordGroen:
 
       doStoplichtNoordGroen();
-      if (serial_getTimer() >= langePauze + potentiometerRead()) {
+      if (serial_getTimer() >= langePauze + potentiometerMillis()) {
         exitStoplichtNoordGroen();
-        satenumber = 3;
+        statenumber = stoplichtNoordOranje;
         entryStoplichtNoordOranje();
 
       } else if (treinDetectie == true) {
         exitStoplichtNoordGroen();
-        satenumber = 6;
+        statenumber = treinKomtEraanNoord;
         entryTreinKomtEraanNoord();
-      } 
+      }
       break;
 
- case 2:
+    case stoplichtZuidGroen:
       doStoplichtZuidGroen();
-      if (serial_getTimer() >= langePauze + potentiometerRead()) {
+      if (serial_getTimer() >= langePauze + potentiometerMillis()) {
         exitStoplichtZuidGroen();
-        satenumber = 4;
+        statenumber = stoplichtZuidOranje;
         entryStoplichtZuidOranje();
       } else if (treinDetectie == true) {
         exitStoplichtZuidGroen();
-        satenumber = 7;
+        statenumber = treinKomtEraanZuid;
         entryTreinKomtEraanZuid();
       }
       break;
 
-  case 3:
+    case stoplichtNoordOranje:
       doStoplichtNoordOranje();
       if (serial_getTimer() >= kortePauze) {
         exitStoplichtNoordOranje();
-        satenumber = 5;
+        statenumber = rust;
         entryRust();
       } else if (treinDetectie == true) {
         exitStoplichtNoordOranje();
-        satenumber = 6;
+        statenumber = treinKomtEraanNoord;
         entryTreinKomtEraanNoord();
       }
       break;
 
-   case 4:
+    case stoplichtZuidOranje:
       doStoplichtZuidOranje();
       if (serial_getTimer() >= kortePauze) {
         exitStoplichtZuidOranje();
-        satenumber = 5;
+        statenumber = rust;
         entryRust();
       } else if (treinDetectie == true) {
         exitStoplichtZuidOranje();
-        satenumber = 7;
+        statenumber = treinKomtEraanZuid;
         entryTreinKomtEraanZuid();
       }
       break;
 
-    case 5:
+    case rust:
       doRust();
       if (serial_getTimer() >= kortePauze) {
         exitRust();
-        satenumber = 0;
+        statenumber = 0;
         entryAllesOpRood();
       }
       break;
 
-    case 6:
+    case treinKomtEraanNoord:
       doTreinKomtEraanNoord();
       if (serial_getTimer() >= kortePauze) {
         exitTreinKomtEraanNoord();
-        satenumber = 8;
+        statenumber = slachtboomSluiten;
         entrySlagboomsluiten();
       }
 
-    case 7:
+    case treinKomtEraanZuid:
       doTreinKomtEraanZuid();
       if (serial_getTimer() >= kortePauze) {
         exitTreinKomtEraanZuid();
-        satenumber = 8;
+        statenumber = slachtboomSluiten;
         entrySlagboomsluiten();
       }
       break;
 
-    case 8:
+    case slachtboomSluiten:
       doSlachtboomSluiten();
       if (servoClosed() == true) {
         exitSlachtboomSluiten();
-        satenumber = 9;
+        statenumber = slachtboomDicht;
         entrySlachtboomDicht();
       }
       break;
 
-    case 9:
+    case slachtboomDicht:
       doSlachtboomDicht();
       if (treinVoorbij == true) {
         exitSlachtboomDicht();
-        satenumber = 10;
+        statenumber = slachtboomOpenen;
         entrySlachtboomOpenen();
       }
       break;
 
-    case 10:
+    case slachtboomOpenen:
       doSlachtboomOpenen();
       if (servoOpened()) {
         exitSlachtboomOpenen();
-        satenumber = 11;
+        statenumber = 11;
         entrySlachtboomOpen();
       }
       break;
 
     case 11:
       doSlachtboomOpen();
-      if (aftellen() == true) {
+      if (getIstimerKlaar() == true) {
         exitSlachtboomOpen();
-        satenumber = 0;
+        statenumber = 0;
       }
   }
 }
-
